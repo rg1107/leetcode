@@ -1,57 +1,51 @@
 class Solution {
-    int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
-    private static final int MOD = 1000000007;
+    int MOD = (int)1e9 + 7;
     public int squareFreeSubsets(int[] nums) {
-        Long[][] memo = new Long[31][1 << 11];
-        int[] freq = new int[31];
-        for (int num : nums) {
-            freq[num]++;
+        int[][] dp = new int[1010][1 << 11];
+        for (int[] d : dp) Arrays.fill(d, -1);
+
+        int[] primes = new int[]{2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
+        
+        int[] numsPrimeMask = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            numsPrimeMask[i] = computeMask(nums[i], primes);
         }
-        // because factors 4, 9 and 25 are not square-free, so that
-        // numbers that contain these factors does not contribute
-        // to square-free product subsets. Set their frequencies to
-        // zeroes here.
-        for (int i = 4; i <= 30; i += 4) {
-            freq[i] = 0;
-        }
-        for (int i = 9; i <= 30; i += 9) {
-            freq[i] = 0;
-        }
-        freq[25] = 0;
-        long result = dfs(2, 0, freq, memo);
-        for (int i = 0; i < freq[1]; i++) {
-            result = (result * 2) % MOD;
-        }
-        return (int) ((result - 1 + MOD) % MOD);
+
+        // error one : return dfs(0, 1, numsPrimeMask, dp) - 1;
+        return (dfs(0, 1, numsPrimeMask, dp) - 1 + MOD) % MOD;
     }
-    private long dfs(int num, int mask, int[] freq, Long[][] memo) {
-        // termination condition
-        if (num >= 31) {
-            return 1;
+
+    private int dfs(int pos, int productMask, int[] numsPrimeMask, int[][] dp) {
+        if (pos >= numsPrimeMask.length) return 1;
+
+        if (dp[pos][productMask] != -1) return dp[pos][productMask];
+
+
+        // case 1: skip current pos
+        int ans = dfs(pos + 1, productMask, numsPrimeMask, dp);
+
+        // case 2: select current if not conflict
+        if ((productMask & numsPrimeMask[pos]) == 0) {
+            ans = (ans + dfs(pos + 1, productMask | numsPrimeMask[pos], numsPrimeMask, dp)) % MOD;
         }
-        if (memo[num][mask] != null) {
-            return memo[num][mask];            
-        }
-        // normal condition
-        // do not add num
-        long result = dfs(num + 1, mask, freq, memo);
-        // do add num
-        boolean addNum = true;
-        int maskNext = mask;
+
+        return dp[pos][productMask] = ans;
+    }
+
+    private int computeMask(int x, int[] primes) {
+        int mask = 0;
         for (int i = 0; i < primes.length; i++) {
-            if (num % primes[i] == 0) {
-                if ((maskNext & (1 << i)) > 0) {
-                    addNum = false;
-                    break;
-                } else {
-                    maskNext |= (1 << i);
-                }
-            }            
+            int p = primes[i];
+            int cnt = 0;
+            while (x % p == 0) {
+                x /= p;
+                cnt++;
+            }
+
+            if (cnt == 0) continue;
+            if (cnt == 1) mask |= (1 << (i + 1));
+            if (cnt >= 2) return -1;
         }
-        if (addNum && freq[num] > 0) {
-            result = (result + freq[num] * dfs(num + 1, maskNext, freq, memo) % MOD) % MOD;
-        }
-        memo[num][mask] = result;
-        return result;
+        return mask;
     }
 }
