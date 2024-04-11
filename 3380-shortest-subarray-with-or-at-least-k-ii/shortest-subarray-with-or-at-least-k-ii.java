@@ -39,16 +39,29 @@ class Solution {
         return false;
     }
 
+    // public int minimumSubarrayLength(int[] nums, int k) {
+    //     int n = nums.length, start = 1, end = n + 1, mid;
+    //     while (start < end) {
+    //         mid = (start + end) / 2;
+    //         if (!isSpecial(nums, k, mid)) {
+    //             start = mid + 1;
+    //         } else {
+    //             end = mid;
+    //         }
+    //     }
+    //     return start != n + 1 ? start : -1;
+    // }
+
     public int minimumSubarrayLength(int[] nums, int k) {
-        int n = nums.length, start = 1, end = n + 1, mid;
-        while (start < end) {
-            mid = (start + end) / 2;
-            if (!isSpecial(nums, k, mid)) {
-                start = mid + 1;
-            } else {
-                end = mid;
+        int n = nums.length, result = n + 1;
+        int[] bits = new int[32];
+        for (int start = 0, end = 0; end < n; end++) {
+            update(bits, nums[end], 1); // insert nums[end] into window
+            while (start <= end && bitsToNum(bits) >= k) {
+                result = Math.min(result, end - start + 1);
+                update(bits, nums[start++], -1); // remove nums[start] from window
             }
         }
-        return start != n + 1 ? start : -1;
+        return result != n + 1 ? result : -1;
     }
 }
