@@ -1,6 +1,7 @@
 class Solution {
     /**
     https://leetcode.com/problems/apply-operations-to-make-two-strings-equal/solutions/4144702/all-scenarios-video-explanation-dp-memo-c-java-python
+    https://leetcode.com/problems/apply-operations-to-make-two-strings-equal/solutions/4144041/java-c-python-one-pass-o-1-space
      */
     // private int[][] dp = new int[501][501];
 
