@@ -1,4 +1,7 @@
 class Solution {
+    /**
+        https://leetcode.com/problems/minimum-seconds-to-equalize-a-circular-array/solutions/3867958/java-python-3-min-of-the-longest-distance-between-same-numbers
+     */
     public int minimumSeconds(List<Integer> nums) {
         Map<Integer, List<Integer>> map = new HashMap<>();
 
