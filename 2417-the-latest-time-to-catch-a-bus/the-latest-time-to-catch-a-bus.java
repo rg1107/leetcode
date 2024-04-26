@@ -1,4 +1,7 @@
 class Solution {
+    /**
+    https://leetcode.com/problems/the-latest-time-to-catch-a-bus/solutions/2259320/greedy-solution-java
+     */
     public int latestTimeCatchTheBus(int[] buses, int[] passengers, int capacity) {
         Arrays.sort(buses);
         Arrays.sort(passengers);
