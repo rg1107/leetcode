@@ -1,4 +1,7 @@
 class Solution {
+    /**
+    https://leetcode.com/problems/disconnect-path-in-a-binary-matrix-by-at-most-one-flip/solutions/3142814/clever-diagonals-with-diagram-explanation
+     */
     public boolean isPossibleToCutPath(int[][] grid) {
     int m = grid.length, n = grid[0].length;
     // Initial pruning
