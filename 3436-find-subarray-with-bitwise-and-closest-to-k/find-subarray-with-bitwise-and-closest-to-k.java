@@ -1,4 +1,8 @@
 class Solution {
+    /*
+    https://leetcode.com/problems/find-subarray-with-bitwise-and-closest-to-k/solutions/5244268/sliding-window-with-frequency-of-bits-java-o-30-n-tc
+    */
+
     public void addBits(int[] bits, int n) {
         for (int i = 31;i>=0;i--) {
             bits[i] += ((n>>i) & 1);
