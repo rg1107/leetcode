@@ -1,5 +1,7 @@
 class Solution {
-
+    /*
+    https://leetcode.com/problems/maximum-total-reward-using-operations-ii/solutions/5284305/java-intuition-described-in-crazy-details
+    */
     Map<Integer, Integer> dp = new HashMap<>();
     
     public int maxTotalReward(int[] arr) {        
