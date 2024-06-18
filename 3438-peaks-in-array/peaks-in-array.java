@@ -89,3 +89,126 @@ class Solution {
         
     }
 }
+
+/**
+Square Root Decomposition 
+https://leetcode.com/problems/peaks-in-array/solutions/5320380/sqrt-decomposition-n-sqrt-n
+ */
+
+// class Solution {
+//     public List<Integer> countOfPeaks(int[] aa, int[][] q) {
+//         int n=aa.length;
+//         int a[] = new int[n+1];
+//         for(int i=0;i<n;i++)a[i+1]=aa[i];
+//         int rootn = (int)Math.sqrt(n);
+//         int parts = n/rootn;
+//         int rem = n%rootn;
+//         if(rem>0)parts++;
+//         int sd[] = new int[parts+1];
+//         for(int i=1;i<=n;i++){
+//             int ind = getSDIndex(n, rootn, i);
+//             int lind = getPartitionLastIndex(n,rootn,i);
+//             int find = getPartitionFirstIndex(n,rootn,i);
+//             if(i==lind || i==find)continue;
+//             sd[ind]+=(a[i]>a[i-1] && a[i]>a[i+1] ? 1 : 0);
+//         }
+//         List<Integer>ans = new ArrayList<>();
+//         int m=q.length;
+//         for(int i=0;i<m;i++){
+//             int t=q[i][0];
+//             if(t==1){
+//                 int l=q[i][1], r=q[i][2];
+//                 l++;r++;
+//                 int x = getRangeQueryAnswer(l+1,r-1,a,sd,n,rootn);
+//                 ans.add(x);
+//             }
+//             else {
+//                 int ind2 = q[i][1];
+//                 int val = q[i][2];
+//                 ind2++;
+//                 for(int ii=ind2-1;ii<=ind2+1;ii++){
+//                     if(ii>n || ii<1)continue;
+//                     int ind = getSDIndex(n, rootn, ii);
+//                     int lind = getPartitionLastIndex(n,rootn,ii);
+//                     int find = getPartitionFirstIndex(n,rootn,ii);
+//                     if(ii==lind || ii==find)continue;
+//                     sd[ind]-=(a[ii]>a[ii-1] && a[ii]>a[ii+1] ? 1 : 0);
+//                 }
+//                 a[ind2]=val;
+//                 for(int ii=ind2-1;ii<=ind2+1;ii++){
+//                     if(ii>n || ii<1)continue;
+//                     int ind = getSDIndex(n, rootn, ii);
+//                     int lind = getPartitionLastIndex(n,rootn,ii);
+//                     int find = getPartitionFirstIndex(n,rootn,ii);
+//                     if(ii==lind || ii==find)continue;
+//                     sd[ind]+=(a[ii]>a[ii-1] && a[ii]>a[ii+1] ? 1 : 0);
+//                 }
+//             }
+//         }
+//         return ans;
+//     }
+    
+//     private static int getRangeQueryAnswer(int l, int r, int a[], int sd[], int n, int rootn){
+//         int ans = 0;
+//         if(l>r || l>n || r>n)return 0;
+//         if(getSDIndex(n, rootn, l) == getSDIndex(n, rootn, r)){
+//             for(int i=l;i<=r;i++){
+//                 if(a[i]>a[i-1] && a[i]>a[i+1])ans++;
+//             }
+//             return ans;
+//         }
+//         int lastIndexOfL = getPartitionLastIndex(n, rootn, l);
+//         for(int i=l;i<=lastIndexOfL;i++){
+//             if(a[i]>a[i-1] && a[i]>a[i+1])ans++;
+//         }
+//         int startInd = getSDIndex(n, rootn, l);
+//         startInd++;
+//         int endInd = getSDIndex(n, rootn, r);
+//         endInd--;
+//         for(int i=startInd;i<=endInd;i++){
+//             int find = getPartitionFirstIndex2(n,rootn,i);
+//             if(find-1>=l-1 && find+1<=r+1){
+//                 if(a[find]>a[find-1] && a[find]>a[find+1])ans++;
+//             }
+//             int lind = getPartitionLastIndex2(n,rootn,i);
+//             if(lind+1<=r+1 && lind-1>=l-1){
+//                 if(a[lind]>a[lind-1] && a[lind]>a[lind+1])ans++;
+//             }
+//             ans+=sd[i];
+//         }
+//         int firstIndexOfR = getPartitionFirstIndex(n, rootn, r);
+//         for(int i=firstIndexOfR;i<=r;i++){
+//             if(a[i]>a[i-1] && a[i]>a[i+1])ans++;
+//         }
+//         return ans;
+//     }
+    
+//     private static int getSDIndex(int n, int rootn, int i){
+//         int x = i%rootn;
+//         if(x==0)x=rootn;
+//         int ind = (i - x)/rootn + 1;
+//         return ind;
+//     }
+
+//     private static int getPartitionLastIndex(int n, int rootn, int i) {
+//         int ind = getSDIndex(n, rootn, i);
+//         return Math.min(ind*rootn,n); 
+//         // min is used to handle the last partition of size < rootn
+//     }
+
+//     private static int getPartitionFirstIndex(int n, int rootn, int i) {
+//         int ind = getSDIndex(n, rootn, i);
+//         return (ind-1)*rootn + 1;
+//     }
+    
+//     private static int getPartitionLastIndex2(int n, int rootn, int i) {
+//         // int ind = getSDIndex(n, rootn, i);
+//         return Math.min(i*rootn,n); 
+//         // min is used to handle the last partition of size < rootn
+//     }
+
+//     private static int getPartitionFirstIndex2(int n, int rootn, int i) {
+//         // int ind = getSDIndex(n, rootn, i);
+//         return (i-1)*rootn + 1;
+//     }
+// }
