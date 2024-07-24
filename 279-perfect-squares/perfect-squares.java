@@ -1,4 +1,7 @@
 class Solution {
+    /**
+    https://leetcode.com/problems/perfect-squares/solutions/71488/summary-of-4-different-solutions-bfs-dp-static-dp-and-mathematics
+     */
     public int numSquares(int n) {
         if (n <=3) {
             return n;
