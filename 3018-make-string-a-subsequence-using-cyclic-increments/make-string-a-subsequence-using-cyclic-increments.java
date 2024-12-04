@@ -4,10 +4,7 @@ class Solution {
         int n = str1.length();
         int m = str2.length();
 
-        for (int index=0;index<n;index++) {
-            if (pt == m) {
-                return true;
-            }
+        for (int index=0;index<n && pt < m;index++) {
             if ((str1.charAt(index) == str2.charAt(pt)) || 
                 ((str1.charAt(index) - 97 + 1)% 26 == (str2.charAt(pt) - 97))) {
                     pt++;
