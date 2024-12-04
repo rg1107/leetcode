@@ -8,6 +8,7 @@
 class Solution {
     /**
     https://leetcode.com/problems/guess-the-word/solutions/711901/java-solution-easy-to-understand
+    https://leetcode.com/problems/guess-the-word/solutions/556075/How-to-explain-to-interviewer-843.-Guess-the-Word
      */
     public void findSecretWord(String[] wordlist, Master master) {
         Random ran = new Random();
