@@ -39,40 +39,30 @@ class Solution {
         return true;
     }
 
-    // Map<Integer, Integer> posMap = new HashMap<>();
-    //     int i = 0;
-    //     int j = 0;
-    //     int m = start.length();
-    //     int n = target.length();
-    //     while (i < m && j < n) {
-    //         while (j< n && target.charAt(j) == '_') {
-    //             j++;
+    // boolean canChange(string st, string tar) {
+    //     int n=tar.length();
+    //     int i=0,j=0;
+    //     while(i<=n && j<=n){
+            
+    //         while(i<n && tar[i]=='_') i++;
+    //         while(j<n && st[j]=='_') j++;
+            
+    //         if(i==n || j==n){
+    //             return i==n && j==n;
     //         }
-    //         while (i < m && j<n && start.charAt(i) != target.charAt(j)) {
-    //             i++;
+            
+    //         if(tar[i]!=st[j]) return false;
+            
+    //         if(tar[i]=='L'){
+    //             if(j<i) return false;
     //         }
-    //         if (i < m && j<n) {
-    //             posMap.put(i, j);
-    //             j++;
+    //         else{
+    //             if(i<j) return false;
     //         }
+            
+    //         i++;
+    //         j++;
     //     }
-
-    //     if (j < n) {
-    //         return false;
-    //     }
-
-    //     for (Map.Entry<Integer, Integer> entry: posMap.entrySet()) {
-    //         int sIndex = entry.getKey();
-    //         int tIndex = entry.getValue();
-
-    //         if (start.charAt(sIndex) == 'L' && sIndex < tIndex) {
-    //             return false;
-    //         }
-
-    //         if (start.charAt(sIndex) == 'R' && sIndex > tIndex) {
-    //             return false;
-    //         }
-    //     }
-
     //     return true;
+    // }
 }
