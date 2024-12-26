@@ -26,31 +26,16 @@ class Solution {
                     parent[parx] = pary;
                     rank[pary]++;
                 }
-                n--;
+                groups--;
             }
 
-            if (n == 1) {
+            if (groups == 1) {
                 ans = log[0];
                 break;
             }
-
-            // if (areAllFriends(parent)) {
-            //     ans = log[0];
-            //     break;
-            // }
         }
 
         return ans;
-    }
-
-    private boolean areAllFriends(int[] parent) {
-        int ans = 0;
-        for (int i=0;i<parent.length;i++) {
-            if(parent[i] == i) {
-                ans++;
-            }
-        }
-        return ans==1;
     }
 
     public int findParent(int x, int[] parent) {
