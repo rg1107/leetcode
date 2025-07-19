@@ -1,4 +1,5 @@
 class Solution:
+    #https://leetcode.com/problems/maximum-profit-from-trading-stocks-with-discounts/solutions/6778576/dfs-dp
     def maxProfit(self, n: int, present: List[int], future: List[int], hierarchy: List[List[int]], budget: int) -> int:
         employee_tree = defaultdict(list)
         for u, v in hierarchy:
