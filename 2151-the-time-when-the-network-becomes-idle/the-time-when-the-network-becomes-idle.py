@@ -5,7 +5,6 @@ class Solution:
         dist = self.dijkstra(graph, 0, n)
 
         min_time = float("-inf")
-        print(dist)
 
         for idx, wait in enumerate(patience):
             m_time = dist[idx] * 2
