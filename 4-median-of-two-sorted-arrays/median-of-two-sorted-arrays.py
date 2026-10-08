@@ -4,32 +4,40 @@ class Solution:
         n = len(nums2)
 
         if m > n:
+            # Binary search will be on the shorter of the two arrays to make O(log(min(m,n)))
             return self.findMedianSortedArrays(nums2, nums1)
         
-        left = 0
-        right = m
-        l = (m + n + 1) // 2
+        mid_len = (m + n + 1)//2
+        low = 0
+        high = m
 
-        while left <= right:
-            part1 = (left + right)//2
-            part2 = l - part1
+        while low <= high:
+            mmid = low + (high - low) // 2
+            nmid = mid_len - mmid
+            
+            l1, l2 = float("-inf"), float("-inf")
+            r1, r2 = float("inf"), float("inf")
 
-            l1 = float("-inf") if part1 == 0 else nums1[part1 - 1]
-            l2 = float("-inf") if part2 == 0 else nums2[part2 - 1]
-            r1 = float("inf") if part1 == m else nums1[part1]
-            r2 = float("inf") if part2 == n else nums2[part2]
+            if mmid - 1 >= 0: 
+                l1 = nums1[mmid-1]
 
+            if nmid - 1 >= 0:
+                l2 = nums2[nmid - 1]
+            
+            if mmid >= 0 and mmid < m:
+                r1 = nums1[mmid]
+            
+            if nmid >= 0 and nmid < n:
+                r2 = nums2[nmid]
+            
             if l1 <= r2 and l2 <= r1:
-                if (m + n) % 2 == 1:
-                    return max(l1, l2)
-                else:
+                if (m + n) % 2 == 0:
                     return (max(l1, l2) + min(r1, r2))/2
+                else:
+                    return max(l1, l2)
             elif l1 > r2:
-                right = part1 - 1
+                high = mmid - 1
             else:
-                left = part1 + 1
+                low = mmid + 1
         
         return -1
-
-            
-        
