@@ -30,7 +30,7 @@ class Solution:
             l = z[index]
             if l > res:
                 res = l
-                start = (index - l)//2
+                start = (index - l) // 2
         
         return s[start: start+res]
 
