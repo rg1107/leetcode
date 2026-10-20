@@ -13,11 +13,9 @@ class Solution:
         return count
         
     def dfs(self, x, y, grid):
-        # if grid[x][y] == '0' or grid[x][y] == '-1':
-        #     return
-        
-        grid[x][y] = '-1'
+        grid[x][y] = '-1' #Marking visited
         dr = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+
         for direction in dr:
             dx, dy = direction
             nx = x + dx
